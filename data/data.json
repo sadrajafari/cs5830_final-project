@@ -1,0 +1,157 @@
+{
+  "@type": "Dataset",
+  "identifier": "10.1038/s41597-020-0548-x",
+  "title": "Metadata record for: Multivariate time series dataset for space weather data analytics",
+  "relatedPublications": [],
+  "repositories": [
+    {
+      "name": "Harvard Dataverse",
+      "value": "https://doi.org/10.7910/DVN/EBCFKM",
+      "@type": "DataCatalog"
+    }
+  ],
+  "assays": [
+    {
+      "measurementType": {
+        "annotationValue": "solar flare",
+        "@type": "PropertyValue"
+      },
+      "technologyType": {
+        "annotationValue": "digital curation",
+        "termAccession": "http://purl.obolibrary.org/obo/OBI_0302914",
+        "termSource": "OBI",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    },
+    {
+      "measurementType": {
+        "annotationValue": "stellar radiation",
+        "termAccession": "http://purl.obolibrary.org/obo/ENVO_01001211",
+        "termSource": "ENVO",
+        "@type": "PropertyValue"
+      },
+      "technologyType": {
+        "annotationValue": "digital curation",
+        "termAccession": "http://purl.obolibrary.org/obo/OBI_0302914",
+        "termSource": "OBI",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    },
+    {
+      "measurementType": {
+        "annotationValue": "solar magnetic data",
+        "@type": "PropertyValue"
+      },
+      "technologyType": {
+        "annotationValue": "digital curation",
+        "termAccession": "http://purl.obolibrary.org/obo/OBI_0302914",
+        "termSource": "OBI",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    }
+  ],
+  "factors": [
+    {
+      "name": "temporal interval",
+      "type": {
+        "annotationValue": "temporal_interval",
+        "termAccession": "http://www.ifomis.org/bfo/1.1/span#TemporalInterval",
+        "termSource": "NPO",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    },
+    {
+      "name": "flare class",
+      "type": {
+        "annotationValue": "Class",
+        "termAccession": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C25346",
+        "termSource": "NCIT",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    },
+    {
+      "name": "location",
+      "type": {
+        "annotationValue": "cartesian spatial coordinate datum",
+        "termAccession": "http://purl.obolibrary.org/obo/IAO_0000400",
+        "termSource": "IAO",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    }
+  ],
+  "studyCharacteristics": {
+    "organism": [],
+    "environmentType": [
+      {
+        "annotationValue": "star",
+        "termAccession": "http://purl.obolibrary.org/obo/ENVO_01000801",
+        "termSource": "ENVO",
+        "@type": "PropertyValue"
+      },
+      {
+        "annotationValue": "climate system",
+        "termAccession": "http://purl.obolibrary.org/obo/ENVO_01001364",
+        "termSource": "ENVO",
+        "@type": "PropertyValue"
+      }
+    ],
+    "geographicalLocation": [],
+    "@type": "variableMeasured"
+  },
+  "ontologySourceReferences": {
+    "NPO": {
+      "name": "NPO",
+      "description": "NanoParticle Ontology",
+      "file": "http://data.bioontology.org/ontologies/NPO",
+      "version": "2011-12-08 (yyyy-mm-dd)",
+      "@type": "DefinedTermSet"
+    },
+    "NCIT": {
+      "name": "NCIT",
+      "description": "National Cancer Institute Thesaurus",
+      "file": "http://data.bioontology.org/ontologies/NCIT",
+      "version": "20.01d",
+      "@type": "DefinedTermSet"
+    },
+    "IAO": {
+      "name": "IAO",
+      "description": "Information Artifact Ontology",
+      "file": "http://data.bioontology.org/ontologies/IAO",
+      "version": "2015-02-23",
+      "@type": "DefinedTermSet"
+    },
+    "OBI": {
+      "name": "OBI",
+      "description": "Ontology for Biomedical Investigations",
+      "file": "http://data.bioontology.org/ontologies/OBI",
+      "version": "2018-08-27",
+      "@type": "DefinedTermSet"
+    },
+    "ENVO": {
+      "name": "ENVO",
+      "description": "Environment Ontology",
+      "file": "http://data.bioontology.org/ontologies/ENVO",
+      "version": null,
+      "@type": "DefinedTermSet"
+    },
+    "@type": "CategoryCodeSet"
+  },
+  "comments": [
+    {
+      "name": "Created With Configuration",
+      "value": "1.0",
+      "@type": "SoftwareApplication"
+    },
+    {
+      "name": "Data Descriptor License",
+      "value": "CC-BY-4.0",
+      "@type": "CreativeWork"
+    }
+  ]
+}
