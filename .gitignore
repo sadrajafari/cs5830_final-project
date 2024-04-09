@@ -1,2 +1,2 @@
-data/SWAN/
-data/SWAN.tar.gz
+*.csv
+data/*
