@@ -8,5 +8,4 @@ The dataset for this project is very large, and as such will not be included in 
 4. Click the blue download button on the right side of the file
    - There should be a drop down menu
 5. Click "Gzip archive". This should download the zip file for the data
-6. Move the zip file to the `data/` directory in the project
-7. Extract the zip file to a directory named `SWAN/`
+6. Extract the zip file to the `data/` directory in the project
