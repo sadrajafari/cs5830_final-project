@@ -49,6 +49,10 @@ def getData():
         x = inputs.iloc[i - dataPointsPerX - dataPointsPerY : i - dataPointsPerY].values
         X.append(x)
         # Add the worst solar flare
+        # maxFlare = max(outputs.iloc[i - dataPointsPerY : i].values)
+        # yValue = np.array([0,0,0,0,0])
+        # yValue[maxFlare] = 1
+        # y.append(np.array([yValue]))
         y.append(np.array([max(outputs.iloc[i - dataPointsPerY : i].values)]))
     print("X and y created.")
     return np.array(X),np.array(y)
