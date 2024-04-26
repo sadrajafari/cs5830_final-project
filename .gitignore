@@ -1,3 +1,5 @@
 *.csv
 data/*
 timeseries/*
+flares_only/*
+balanced_data/*

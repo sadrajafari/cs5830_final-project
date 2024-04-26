@@ -13,14 +13,12 @@ def getData():
     df.loc[df['MFLARE'] > 0, className] = 3
     df.loc[df['XFLARE'] > 0, className] = 4
     print("Data Obtained.")
-
     # feature_columns = ['TOTUSJH', 'TOTBSQ', 'TOTPOT', 'TOTUSJZ', 'ABSNJZH',
     #     'SAVNCPP', 'USFLUX', 'TOTFZ', 'MEANPOT', 'EPSZ', 'MEANSHR', 'SHRGT45',
     #     'MEANGAM', 'MEANGBT', 'MEANGBZ', 'MEANGBH', 'MEANJZH', 'TOTFY',
     #     'MEANJZD', 'MEANALP', 'TOTFX', 'EPSY', 'EPSX', 'R_VALUE']
     feature_columns = ['TOTUSJH', 'TOTBSQ', 'TOTUSJZ', 'USFLUX', 'TOTFZ', 'R_VALUE']
     class_columns = [className]
-
     print("Standardizing Data...")
     for feature in feature_columns:
         df[feature] = (df[feature] - df[feature].mean()) / df[feature].std()
@@ -28,34 +26,49 @@ def getData():
     # Only consider data from 2014
     print("Taking only 2014 data...")
     df["year"] = pd.to_datetime(df["Timestamp"]).dt.year
-    # data = df[(df.year > 2013) & (df.year < 2015)]
-    # data = df.iloc[0:10000]
-    data = df[df.year == 2014]
-    # data = df[(df.flareType != 0)]
+    df = df.drop([
+        'MFLARE_LABEL', 
+        'BFLARE_LABEL', 
+        'CFLARE_LABEL', 
+        'XFLARE_LABEL', 
+        'XFLARE_LABEL_LOC', 
+        'BFLARE_LABEL_LOC', 
+        'MFLARE_LABEL_LOC', 
+        'CFLARE_LABEL_LOC', 
+        'BFLARE_LOC', 
+        'XFLARE_LOC',
+        'MFLARE_LOC',
+        'CFLARE_LOC',
+        'XFLARE', 
+        'BFLARE',
+        'CFLARE',
+        'MFLARE',
+        'XR_MAX',
+    ], axis=1)
+    df = df.dropna()
+    df = df.reset_index()
+    del df["index"]
+
+    data = df[(df.flareType != 0)]
+    noFlare = df[(df.flareType == 0)]
     print("Subset of data obtained.")
     to_delete = []
     for col in data.columns:
         if not (feature_columns.__contains__(col) or class_columns.__contains__(col)):
             to_delete.append(col)
     data.drop(columns=to_delete, inplace=True)
-    data = data.dropna()
-    print("Creating X and y ...")
-    inputs = data[feature_columns]
-    outputs = data[class_columns]
+    inputs = df[feature_columns]
+    outputs = df[class_columns]
     dataPointsPerX = 5 * 24 # 12 mins/point * (5 * 24) points = 1 day of data
     dataPointsPerY = 5 * 12 # Predict next 12 hours 
-    X = []
     y = []
-    for i in range(dataPointsPerX + dataPointsPerY, len(inputs)):
-        x = inputs.iloc[i - dataPointsPerX - dataPointsPerY : i - dataPointsPerY].values
+    X = []
+    balancedData = pd.concat([data, noFlare.sample(1500)], axis=0)
+    balancedData = balancedData.sample(frac=1)
+    for idx, _ in balancedData.iterrows():
+        x = inputs.loc[idx - dataPointsPerX + 1 : idx].values
         X.append(x)
-        # Add the worst solar flare
-        # maxFlare = max(outputs.iloc[i - dataPointsPerY : i].values)
-        # yValue = np.array([0,0,0,0,0])
-        # yValue[maxFlare] = 1
-        # y.append(np.array([yValue]))
-        y.append(np.array([max(outputs.iloc[i - dataPointsPerY : i].values)]))
-    print("X and y created.")
+        y.append(np.array([max(outputs.loc[idx : idx + dataPointsPerY - 1].values)]))
     return np.array(X),np.array(y)
 
 def splitData(X,y, split=0.7):
@@ -86,4 +99,4 @@ def pickleObject(obj, fileName):
 if __name__=="__main__":
     X,y = getData()
     X_train, X_test, y_train, y_test = splitData(X,y)
-    persistTrainTestData(X_train, X_test, y_train, y_test, "timeseries")
+    persistTrainTestData(X_train, X_test, y_train, y_test, "balanced_data")
